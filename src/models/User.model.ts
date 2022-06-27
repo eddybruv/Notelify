@@ -8,6 +8,7 @@ const UserSchema: Schema = new Schema(
     password: String,
     email: String,
     imageUrl: String,
+    workspaceIDs: [{type: Schema.Types.ObjectId, ref: "workspace"}]
   },
   {
     timestamps: true,
