@@ -6,4 +6,5 @@ export interface IUser extends Document {
   email: string;
   imageUrl: string;
   password: string;
+  workspaceIDs: string[];
 }
