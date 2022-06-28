@@ -1,0 +1,80 @@
+.body {
+  background-color: #fafbfc;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../assets/login/trello-left.7317ad1f.svg"), url("../assets/login/trello-right.16b9c9bb.svg");
+  background-position: left bottom, right bottom;
+  background-repeat: no-repeat no-repeat;
+  background-size: calc(100% - 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+}
+
+.followUp {
+  padding-bottom: 1rem;
+}
+
+.main {
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 9px;
+}
+
+.header {
+  padding: 1rem
+}
+
+.form {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.or {
+  text-align: center;
+  font-weight: 100;
+  font-size: .8rem;
+  padding-bottom: 1rem;
+}
+
+.signUp {
+  width: 80%;
+  margin: 0 auto;
+  border-top: 1px solid rgb(213, 216, 222);
+  padding: 1rem;
+}
+
+.signUp a {
+  text-decoration: none;
+  color: #0064fe;
+  font-size: .9rem;
+  font-weight: 300;
+}
+
+.signUp a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  justify-self: flex-end;
+}
+
+@media only screen and (max-width: 760px) {
+  .body {
+    background-image: none;
+  }
+}
