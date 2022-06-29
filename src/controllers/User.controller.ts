@@ -73,4 +73,18 @@ const updateOwner = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-export {getUsers, addUserToWorkspace, createUser, getWorkspaceMembers, updateOwner}
+const loginUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const {username, password} = req.body as Pick<IUser, "username" | "password">;
+    const user:IUser[] = await UserModel.find({username, password})
+      .populate({path: "workspaceIDs"});
+
+    user.length !== 0 ?
+      res.json({message: "user found", data: user}) :
+      res.json({message: "user not found"});
+  } catch(e) {
+    throw(e);
+  }
+}
+
+export {getUsers, addUserToWorkspace, createUser, getWorkspaceMembers, updateOwner, loginUser}
