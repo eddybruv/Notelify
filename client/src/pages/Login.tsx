@@ -1,12 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { InputAdornment, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import style from "../styles/login.module.css";
 import MailIcon from "@mui/icons-material/Mail";
 import HttpsIcon from "@mui/icons-material/Https";
 import GoogleIcon from "@mui/icons-material/Google";
+import axios, {AxiosResponse} from "axios";
 
 const Login: FC = () => {
+
+  const [user, setUser] = useState({
+    username: "",
+    password: ""
+  });
+
   return (
     <section className={style.body}>
       <section className={style.content}>
