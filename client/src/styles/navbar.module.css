@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 25rem;
+  width: calc(100% - 80%);
   z-index: 1;
   border-right: 1px solid #e2e3e6;
   background-color: #f8f8f9;
@@ -12,7 +12,6 @@
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .workspaceInfo {
@@ -28,17 +27,58 @@
   border: 1px solid #e2e3e6;
   border-radius: .9rem;
   display: flex;
-  justify-content: space-between;
   padding: .5rem;
+  align-items: center;
+}
+
+.nameBox {
+  padding-left: .5rem;
 }
 
 .photoBox {
   height: 100%;
   width: 4rem;
+  border: none;
+  border-radius: .5rem;
 }
 
 .photoBox img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.name {
+  font-weight: 400;
+}
+
+.label {
+  font-weight: 300;
+  color: #8f8f93;
+}
+
+.navSection {
+  padding: 1.5rem;
+}
+
+.navSection * {
+  color: #89909c;
+}
+
+.navBox {
+  margin-bottom: .5rem;
+  padding: .7rem;
+  display: flex;
+  align-items: center;
+  border-radius: .5rem;
+}
+
+.navBox:hover {
+  background-color: #e7e9eb;
+  color: #6c7583;
+  cursor: pointer;
+}
+
+.navBox p {
+  padding-left: 1rem;
 }
