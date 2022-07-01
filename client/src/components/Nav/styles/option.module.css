@@ -1,0 +1,17 @@
+.navBox {
+  margin-bottom: .5rem;
+  padding: .7rem;
+  display: flex;
+  align-items: center;
+  border-radius: .5rem;
+}
+
+.navBox:hover {
+  background-color: #e7e9eb;
+  color: #6c7583;
+  cursor: pointer;
+}
+
+.navBox p {
+  padding-left: 1rem;
+}
