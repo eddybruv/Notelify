@@ -1,6 +1,17 @@
-import React, {FC} from "react";
-import logo from "../assets/logo1.png"
-import style from "../styles/navbar.module.css"
+import React, {FC, ReactNode} from "react";
+import logo from "../assets/logo1.png";
+import style from "../styles/navbar.module.css";
+import {HomeOutlined} from "@mui/icons-material";
+import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+
+import Options from "./Nav/Option"
+import navArr from "./Nav/navArr";
+
+
 
 const Navbar: FC = () => {
   return (
@@ -12,9 +23,19 @@ const Navbar: FC = () => {
               <section className={style.photoBox}>
                 <img src={logo} alt=""/>
               </section>
+              <section className={style.nameBox}>
+                <p className={style.name}>Adidas</p>
+                <p className={style.label}>Workspace</p>
+              </section>
             </section>
           </section>
-          <section className={style.navs}></section>
+          <section className={style.navSection}>
+            {
+              navArr.map((nav, index:number) => {
+                return <Options icon={nav.icon} text={nav.text} key={index} />
+              })
+            }
+          </section>
         </section>
         <section className={style.bottom}></section>
       </section>
