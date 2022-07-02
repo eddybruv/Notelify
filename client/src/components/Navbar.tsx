@@ -2,8 +2,11 @@ import { FC } from "react";
 import logo from "../assets/logo1.png";
 import style from "../styles/navbar.module.css";
 
-import Options from "./Nav/Option";
-import navArr from "./Nav/navArr";
+import Options from "./partials/Nav/Option";
+import navArr from "./partials/Nav/navArr";
+
+import {NotificationsOutlined} from "@mui/icons-material";
+import avatar from "../assets/runstar.jpg"
 
 const Navbar: FC = () => {
   return (
@@ -27,7 +30,14 @@ const Navbar: FC = () => {
             })}
           </section>
         </section>
-        <section className={style.bottom}></section>
+        <section className={style.bottom}>
+          <Options icon={<NotificationsOutlined/>} text={"Notification"}/>
+          <section className={style.personalInfo}>
+            <section className={style.avatarBox}>
+              <img src={avatar} alt=""/>
+            </section>
+          </section>
+        </section>
       </section>
     </section>
   );
