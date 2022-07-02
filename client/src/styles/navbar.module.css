@@ -12,6 +12,8 @@
 .content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .workspaceInfo {
@@ -65,20 +67,22 @@
   color: #89909c;
 }
 
-.navBox {
-  margin-bottom: .5rem;
-  padding: .7rem;
-  display: flex;
-  align-items: center;
-  border-radius: .5rem;
+.bottom {
+  padding: 1.5rem;
+  color: #89909c;
 }
 
-.navBox:hover {
-  background-color: #e7e9eb;
-  color: #6c7583;
-  cursor: pointer;
+.personalInfo {
+  height: 2.7rem;
 }
 
-.navBox p {
-  padding-left: 1rem;
+.avatarBox {
+  height: inherit;
+  border-radius: 50%;
+}
+
+.avatarBox img {
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
