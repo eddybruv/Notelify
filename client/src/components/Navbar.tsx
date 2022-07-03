@@ -6,7 +6,8 @@ import Options from "./partials/Nav/Option";
 import navArr from "./partials/Nav/navArr";
 
 import {NotificationsOutlined} from "@mui/icons-material";
-import avatar from "../assets/runstar.jpg"
+import avatar from "../assets/runstar.jpg";
+import {Avatar} from "@mui/material";
 
 const Navbar: FC = () => {
   return (
@@ -33,9 +34,8 @@ const Navbar: FC = () => {
         <section className={style.bottom}>
           <Options icon={<NotificationsOutlined/>} text={"Notification"}/>
           <section className={style.personalInfo}>
-            <section className={style.avatarBox}>
-              <img src={avatar} alt=""/>
-            </section>
+            <Avatar src={avatar}/>
+            <p>Profile</p>
           </section>
         </section>
       </section>
