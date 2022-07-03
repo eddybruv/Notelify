@@ -74,15 +74,11 @@
 
 .personalInfo {
   height: 2.7rem;
+  display: flex;
+  align-items: center;
 }
 
-.avatarBox {
-  height: inherit;
-  border-radius: 50%;
-}
 
-.avatarBox img {
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+.personalInfo p {
+  padding-left: .8rem;
 }
