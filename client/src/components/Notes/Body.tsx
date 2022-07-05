@@ -4,7 +4,7 @@ import style from "../../styles/view.module.css";
 const ViewNotes:FC = () => {
   return (
     <section>
-
+      Notes
     </section>
   )
 }
