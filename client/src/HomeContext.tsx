@@ -1,18 +1,23 @@
-import {createContext, useState, FC} from "react";
-import ViewNotes from "./components/Notes/ViewNotes";
+import React, {createContext, useState, FC, ReactNode} from "react";
+import ViewNotes from "./components/Notes/Body";
 
-interface IHomeContext {
-  component: JSX.Element;
+export interface IHomeContext {
+  content?: JSX.Element;
+  setContent?:  React.Dispatch<React.SetStateAction<JSX.Element>>
+}
+
+interface IComponent {
+  children?: ReactNode;
 }
 
 const HomeContext = createContext<IHomeContext | null>(null);
 
-const HomeProvider = ({component} : IHomeContext) => {
+export const HomeProvider: FC<IComponent> = ({children}: IComponent) => {
   const [content, setContent] = useState(<ViewNotes/>);
 
   return (
     <HomeContext.Provider value={{content, setContent}}>
-
+      {children}
     </HomeContext.Provider>
   )
 }
