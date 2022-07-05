@@ -2,7 +2,9 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./pages/Login"
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+
+import {HomeProvider} from "./HomeContext";
 
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import './App.css';
@@ -21,15 +23,17 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Routes>
-            <Route path={"/"} element={<Register/>}/>
-            <Route path={"/login"} element={<Login/>}/>
-            <Route path={"/dashboard"} element={<Dashboard/>}/>
-          </Routes>
-        </Router>
-      </div>
+      <HomeProvider>
+        <div className="App">
+          <Router>
+            <Routes>
+              <Route path={"/"} element={<Register/>}/>
+              <Route path={"/login"} element={<Login/>}/>
+              <Route path={"/home"} element={<Home/>}/>
+            </Routes>
+          </Router>
+        </div>
+      </HomeProvider>
     </ThemeProvider>
   );
 }
