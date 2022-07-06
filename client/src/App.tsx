@@ -4,7 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 
-import {HomeProvider} from "./HomeContext";
+import {HomeProvider} from "./context/HomeContext";
 
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import './App.css';
