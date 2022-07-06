@@ -5,4 +5,5 @@
 
 .otherDiv {
   margin-left: calc(100% - 80%);
+  width: 100%;
 }
