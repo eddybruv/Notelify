@@ -1,0 +1,113 @@
+.body {
+  width: 100%;
+}
+
+.header {
+  height: 8rem;
+  padding: 2rem 2rem 0 2rem;
+  border-bottom: 1px solid #e2e3e6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.label h2 {
+  font-weight: 400;
+}
+
+.option ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin-bottom: -0.1rem;
+}
+
+.option li {
+  padding-bottom: .5rem;
+  font-weight: 400;
+  color: #8f8f93;
+}
+
+li.active {
+  color: #5b6573;
+  border-bottom: 2px solid #0064fe;
+}
+
+.option li:hover {
+  cursor: pointer;
+}
+
+.searchBox {
+  width: 100%;
+  border-bottom: 1px solid #e2e3e6;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  padding: .5rem;
+  color: #89909c;
+  font-size: 1rem;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border: 1px solid #e2e3e6;
+  border-radius: .5rem;
+}
+
+.sort select:hover {
+  cursor: pointer;
+}
+
+.sort p {
+  color: #89909c;
+  padding: 0 .4rem;
+}
+
+.sort select {
+  border: none;
+  outline: none;
+  appearance: none;
+  border: 0;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.main {
+  padding: 2rem;
+  width: 100%;
+}
+
+.main .bigLabel {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #89909c;
+  padding-bottom: 1rem;
+}
+
+.otherNotes, .pinnedNotes {
+  width: 100%;
+}
+
+.notesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 2rem;
+}
