@@ -6,7 +6,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import Home from "../../../pages/Home";
-import Body from "../../Notes/Body";
+import Body from "../../Notes/NotesBody";
 import DashboardBody from "../../Dashboard/DashboardBody"
 
 interface IOption {
