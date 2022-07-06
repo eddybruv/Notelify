@@ -1,5 +1,5 @@
 import React, {createContext, useState, FC, ReactNode} from "react";
-import ViewNotes from "./components/Notes/Body";
+import ViewNotes from "../components/Notes/NotesBody";
 
 export interface IHomeContext {
   content?: JSX.Element;
