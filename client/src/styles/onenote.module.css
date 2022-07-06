@@ -1,0 +1,37 @@
+.body {
+  border: 1px solid #ebeced;
+  width: 30%;
+  height: 12rem;
+  padding: 1rem;
+  overflow-y: hidden;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding-bottom: .5rem;
+}
+
+.name {
+  color: #747c8a;
+  font-weight: 500;
+}
+
+.time {
+  color: #89909c;
+  font-weight: 200;
+}
+
+.header {
+  color: #223045;
+  font-weight: 500;
+}
+
+.content {
+  color: #697280;
+  font-weight: 300;
+  font-size: .9rem;
+}
