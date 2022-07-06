@@ -1,6 +1,6 @@
 import React, {FC, ReactNode, SetStateAction, useContext} from "react";
 import style from "./styles/option.module.css"
-import HomeContext from "../../../HomeContext";
+import HomeContext from "../../../context/HomeContext";
 import Home from "../../../pages/Home"
 
 interface Props {
