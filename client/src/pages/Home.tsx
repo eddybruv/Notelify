@@ -1,8 +1,8 @@
 import React, { FC, useContext } from "react";
-import HomeContext, { IHomeContext } from "../HomeContext";
-import style from "../styles/dashboard.module.css";
+import HomeContext, { IHomeContext } from "../context/HomeContext";
+import style from "../styles/home.module.css";
 import Navbar from "../components/Navbar";
-import ViewNotes from "../components/Notes/Body";
+import ViewNotes from "../components/Notes/NotesBody";
 
 const Home: FC = () => {
   const { content } = useContext(HomeContext) as IHomeContext;
