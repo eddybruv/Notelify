@@ -1,13 +1,16 @@
-import {ReactNode, FC, SetStateAction} from "react";
+import {ReactNode, SetStateAction} from "react";
 import {HomeOutlined} from "@mui/icons-material";
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import Home from "../../../pages/Home";
+import TasksBody from "../../Tasks/TasksBody";
 import Body from "../../Notes/NotesBody";
-import DashboardBody from "../../Dashboard/DashboardBody"
+import DashboardBody from "../../Dashboard/DashboardBody";
+import ChatBody from "../../Chats/ChatBody";
+import AdminBody from "../../Administration/AdminBody";
+import TeamsBody from "../../Teams/TeamsBody";
 
 interface IOption {
   icon: ReactNode;
@@ -29,22 +32,22 @@ const options: IOption[] = [
   {
     icon: <PeopleAltOutlinedIcon />,
     text: "Teams",
-    component: <Body />,
+    component: <TeamsBody />,
   },
   {
     icon: <CheckBoxOutlinedIcon />,
     text: "Tasks",
-    component: <Body />,
+    component: <TasksBody />,
   },
   {
     icon: <SettingsOutlinedIcon />,
     text: "Administration",
-    component: <Body />,
+    component: <AdminBody />,
   },
   {
     icon: <ForumOutlinedIcon />,
     text: "Chat",
-    component: <Body />,
+    component: <ChatBody />,
   },
 ];
 
