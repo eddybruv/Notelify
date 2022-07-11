@@ -1,16 +1,30 @@
-import React, {FC, useState, MouseEvent} from "react";
+import React, {FC, useState, MouseEvent, useContext} from "react";
+import style from "../../styles/notesbody.module.css";
+
+//mui imports
 import {Button, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
-import style from "../../styles/notesbody.module.css";
+
+// components and stuff
+import CreateNote from "./CreateNote"
 import notesArr from "./notesArr";
 import OneNote from "./OneNote";
 
 const ViewNotes: FC = () => {
 
+  const [showModal, setShowModal] = useState(false);
   const [publicState, setPublic] = useState(true);
   const [privateState, setPrivate] = useState(false);
+
+  const handleModalClose = () => {
+    setShowModal(() => false)
+  }
+
+  const handleModalOpen = () => {
+    setShowModal(() => true);
+  }
 
   const handlePublic = (e: MouseEvent<HTMLLIElement>) => {
     setPrivate(() => false);
@@ -28,6 +42,7 @@ const ViewNotes: FC = () => {
         <section className={style.label}>
           <h2>Notes</h2>
           <Button
+            onClick={handleModalOpen}
             size={"large"}
             sx={{textTransform: "none"}}
             variant={"contained"}
@@ -71,6 +86,11 @@ const ViewNotes: FC = () => {
           </section>
         </section>
       </section>
+
+      {
+        showModal && <CreateNote handleModalClose={handleModalClose}/>
+      }
+
     </section>
   )
 }
