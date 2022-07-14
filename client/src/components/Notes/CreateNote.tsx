@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import style from "../../styles/createnote.module.css"
+import Switch from '@mui/material/Switch';
+import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 
 // mui stuff
 import {Button, TextField} from "@mui/material";
@@ -41,6 +43,8 @@ const CreateNote = ({handleModalClose}: Props) => {
           />
 
           <textarea className={style.textarea} placeholder="Your description goes here"/>
+          <p className={style.switch}><Switch color="primary"/> Make private</p>
+          <Button variant="contained" sx={{width: "fit-content"}} endIcon={<ForwardToInboxIcon/>}>Push</Button>
         </section>
       </div>
     </section>
