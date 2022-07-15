@@ -3,6 +3,9 @@ import {IUser} from "../types/User.type";
 import UserModel from "../models/User.model";
 import WorkspaceModel from "../models/Workspace.model";
 
+const bcrypt = require("bcrypt");
+
+
 const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const {
@@ -13,11 +16,13 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
       email
     } = req.body as Pick<IUser, "name" | "username" | "imageUrl" | "password" | "email">;
 
+    const salt = await bcrypt.genSalt(2)
+
     const user: IUser = await new UserModel({
       name,
       username,
       imageUrl,
-      password,
+      password: await bcrypt.hash(password, salt),
       email,
       workspaceIDs: [],
     });
@@ -27,6 +32,20 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
   } catch (error) {
     throw (error)
+  }
+}
+
+const loginUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const {username, password} = req.body as Pick<IUser, "username" | "password">;
+    const user:IUser[] = await UserModel.find({username, password})
+      .populate({path: "workspaceIDs"});
+
+    user.length !== 0 ?
+      res.json({message: "user found", data: user}) :
+      res.json({message: "user not found"});
+  } catch(e) {
+    throw(e);
   }
 }
 
@@ -73,18 +92,5 @@ const updateOwner = async (req: Request, res: Response): Promise<void> => {
   }
 }
 
-const loginUser = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const {username, password} = req.body as Pick<IUser, "username" | "password">;
-    const user:IUser[] = await UserModel.find({username, password})
-      .populate({path: "workspaceIDs"});
-
-    user.length !== 0 ?
-      res.json({message: "user found", data: user}) :
-      res.json({message: "user not found"});
-  } catch(e) {
-    throw(e);
-  }
-}
 
 export {getUsers, addUserToWorkspace, createUser, getWorkspaceMembers, updateOwner, loginUser}
