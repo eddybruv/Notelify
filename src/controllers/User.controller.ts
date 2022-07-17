@@ -38,7 +38,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
         });
 
         const newUser: IUser = await user.save();
-        const token = jwt.sign({email: newUser.email, password: newUser.password, imageUrl: newUser.imageUrl, workspaceIDs: newUser.workspaceIDs, username: newUser.username, name: newUser.name}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1hr"})
+        const token = jwt.sign(newUser, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1hr"})
         res.json({message: "new user created", data: newUser, token});
       }
     }
