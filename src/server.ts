@@ -7,6 +7,7 @@ import path from "path";
 import UserRoute from "./routes/User.route";
 import NoteRoute from "./routes/Note.route";
 import WorkspaceRoute from "./routes/Workspace.route";
+import auth from "./middleware/auth"
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ const app: Express = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
+// @ts-ignore
+// app.use(auth);
 
 app.use("/api/user", UserRoute);
 app.use("/api/note", NoteRoute);
@@ -23,6 +26,7 @@ app.use("/api/workspace", WorkspaceRoute);
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => console.log("🆙[DataBase]: Up and running!"))
   .catch((error) => {
+    console.log("⬇[DataBase]: Problem encountered️")
     throw(error)
   });
 
