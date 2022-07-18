@@ -1,4 +1,5 @@
 import {Router} from "express";
+import auth from "../middleware/auth"
 import {
   createUser,
   addUserToWorkspace,
@@ -14,7 +15,8 @@ router.post("/create-user", createUser);
 router.post("/add-to-workspace", addUserToWorkspace);
 router.get('/get-users', getUsers);
 router.get("/get-workspace-members/:id", getWorkspaceMembers);
-router.post("/update-owner", updateOwner);
+// @ts-ignore
+router.post("/update-owner", auth, updateOwner);
 router.post("/login", loginUser);
 
 export default router
