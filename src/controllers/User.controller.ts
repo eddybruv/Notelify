@@ -38,7 +38,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
         });
 
         const newUser: IUser = await user.save();
-        const token = jwt.sign(newUser, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1hr"})
+        const token = jwt.sign({...newUser}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "7 days"})
         res.json({message: "new user created", data: newUser, token});
       }
     }
@@ -57,14 +57,18 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
     const checkUsername:IUser[] = await UserModel.find({username})
 
     if(checkUsername.length > 0) {
-      bcrypt.compare(password, checkUsername[0].password)
+      const user = checkUsername[0]
+      bcrypt.compare(password, user.password)
         .then((match: boolean) => {
           if(match) {
-            res.json({message: "login successful", data: checkUsername[0]});
+            const token = jwt.sign({...user}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "7 days"} )
+            res.json({message: "login successful", data: user, token});
           } else {
             res.json({message: "password incorrect"});
           }
         })
+    } else {
+      res.json({message: "user does not exists"})
     }
   } catch(e) {
     throw(e);
@@ -75,7 +79,7 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
 
 const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
-    const users: IUser[] = await UserModel.find();
+    const users: IUser[] = await UserModel.find({});
     res.status(200).json({data: users})
   } catch (error) {
     throw (error);
