@@ -2,7 +2,6 @@ import express, {Express} from 'express';
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import cors from "cors";
-import path from "path";
 
 import UserRoute from "./routes/User.route";
 import NoteRoute from "./routes/Note.route";
@@ -16,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 // @ts-ignore
-// app.use(auth);
+app.use(auth);
 
 app.use("/api/user", UserRoute);
 app.use("/api/note", NoteRoute);
