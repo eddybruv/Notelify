@@ -1,10 +1,13 @@
 import React, { FC, useState } from "react";
 import { InputAdornment, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import style from "../styles/login.module.css";
+import style from "../../styles/login.module.css";
 import MailIcon from "@mui/icons-material/Mail";
 import HttpsIcon from "@mui/icons-material/Https";
 import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import axios, {AxiosResponse} from "axios";
 
 const Login: FC = () => {
@@ -81,10 +84,17 @@ const Login: FC = () => {
             </Button>
           </form>
           <section className={style.signUp}>
-            <Link to={"/register"}>Sign up for an account</Link>
+            <Link to={"/"}>Sign up for an account</Link>
           </section>
         </section>
-        <footer className={style.footer}>Footer</footer>
+        <footer className={style.footer}>
+          <p>By Eddybruv</p>
+          <div className={style.bottomIcons}>
+              <a href="https://github.com/eddybruv" target="_blank" rel="noreferrer"><GitHubIcon /></a>
+              <a href="https://twitter.com/eddybruv_" target={"_blank"} rel="noreferrer"><TwitterIcon /></a>
+              <a href="https://www.linkedin.com/in/edwin-ajong/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+          </div>
+        </footer>
       </section>
     </section>
   );
