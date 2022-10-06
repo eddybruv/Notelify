@@ -1,14 +1,38 @@
-import React, {FC} from "react";
+import React, {ChangeEvent, FC, useState} from "react";
 import {InputAdornment, TextField, Button} from "@mui/material";
 import {Link} from "react-router-dom";
-import style from "../styles/login.module.css"
+import style from "../../styles/login.module.css"
 import MailIcon from "@mui/icons-material/Mail";
 import HttpsIcon from "@mui/icons-material/Https"
 import GoogleIcon from '@mui/icons-material/Google';
 import PersonIcon from "@mui/icons-material/Person";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 
 const Register: FC = () => {
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    password: '',
+    email: '',
+  });
+
+  const checkEmail = (email: string):boolean => {
+    let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/;
+    return email.match(regex) ? false : true
+  }
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {value, name} = e.target;
+    setUser({
+      ...user,
+      [name]: value
+    });
+    console.log(user)
+  }
+
   return (
     <section className={style.body}>
       <section className={style.content}>
@@ -58,6 +82,7 @@ const Register: FC = () => {
               label={"Email"}
               id={"email"}
               name={"email"}
+              error={checkEmail(user.email)}
               inputProps={{
                 style: {
                   padding: 10,
@@ -70,6 +95,8 @@ const Register: FC = () => {
                   </InputAdornment>
                 ),
               }}
+              value={user.email}
+              onChange={handleChange}
             />
             <TextField
               sx={{ marginBottom: "1rem", width: "100%" }}
@@ -116,7 +143,13 @@ const Register: FC = () => {
             <Link to={"/login"}>Already have an account? Log in</Link>
           </section>
         </section>
-        <footer className={style.footer}>Footer</footer>
+        <footer className={style.footer}>
+          <p>By Eddybruv</p>
+          <div className={style.bottomIcons}>
+              <a href="https://github.com/eddybruv" target="_blank" rel="noreferrer"><GitHubIcon /></a>
+              <a href="https://twitter.com/eddybruv_" target={"_blank"} rel="noreferrer"><TwitterIcon /></a>
+              <a href="https://www.linkedin.com/in/edwin-ajong/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
+          </div></footer>
       </section>
     </section>
   );
