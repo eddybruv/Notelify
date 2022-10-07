@@ -20,8 +20,35 @@ const Register: FC = () => {
   });
 
   const checkEmail = (email: string):boolean => {
+    if (email === '')
+      return false;
     let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/;
     return email.match(regex) ? false : true
+  }
+
+  const emailHelperText = (email: string) => {
+    if(checkEmail(email))
+      return "Email not valid"
+    return ""
+  }
+
+  const checkPassword = (password: string) => {
+    if (password === '')
+      return false
+    // Minimum eight characters and one number:
+    let regex = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$";
+    return password.match(regex) ? false : true
+  }
+
+  const passwordHelperText = (password: string) => {
+    const numRegex = /\d/g;
+    
+    if(checkPassword(password)) {
+      if(password.length < 8 || !numRegex.test(password)) {
+        return "Password must be more than 8 characters and contain a number";
+       }
+    }
+    return ""
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +57,6 @@ const Register: FC = () => {
       ...user,
       [name]: value
     });
-    console.log(user)
   }
 
   return (
@@ -83,6 +109,7 @@ const Register: FC = () => {
               id={"email"}
               name={"email"}
               error={checkEmail(user.email)}
+              helperText={emailHelperText(user.email)}
               inputProps={{
                 style: {
                   padding: 10,
@@ -104,6 +131,11 @@ const Register: FC = () => {
               id={"password"}
               name={"password"}
               type={"password"}
+              error={checkPassword(user.password)}
+              value={user.password}
+              helperText={passwordHelperText(user.password)}
+              onChange={handleChange}
+              
               inputProps={{
                 style: {
                   padding: 10,
@@ -146,7 +178,7 @@ const Register: FC = () => {
         <footer className={style.footer}>
           <p>By Eddybruv</p>
           <div className={style.bottomIcons}>
-              <a href="https://github.com/eddybruv" target="_blank" rel="noreferrer"><GitHubIcon /></a>
+              <a href="https://github.com/eddybruv/Notelify" target="_blank" rel="noreferrer"><GitHubIcon /></a>
               <a href="https://twitter.com/eddybruv_" target={"_blank"} rel="noreferrer"><TwitterIcon /></a>
               <a href="https://www.linkedin.com/in/edwin-ajong/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
           </div></footer>
