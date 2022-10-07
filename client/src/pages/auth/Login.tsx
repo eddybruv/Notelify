@@ -90,7 +90,7 @@ const Login: FC = () => {
         <footer className={style.footer}>
           <p>By Eddybruv</p>
           <div className={style.bottomIcons}>
-              <a href="https://github.com/eddybruv" target="_blank" rel="noreferrer"><GitHubIcon /></a>
+              <a href="https://github.com/eddybruv/Notelify" target="_blank" rel="noreferrer"><GitHubIcon /></a>
               <a href="https://twitter.com/eddybruv_" target={"_blank"} rel="noreferrer"><TwitterIcon /></a>
               <a href="https://www.linkedin.com/in/edwin-ajong/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
           </div>
