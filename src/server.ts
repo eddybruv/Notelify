@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 // @ts-ignore
-app.use(auth);
+// app.use(auth);
 
 app.use("/api/user", UserRoute);
 app.use("/api/note", NoteRoute);
