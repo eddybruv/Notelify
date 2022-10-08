@@ -1,63 +1,81 @@
-import React, {ChangeEvent, FC, useState} from "react";
-import {InputAdornment, TextField, Button} from "@mui/material";
-import {Link} from "react-router-dom";
-import style from "../../styles/login.module.css"
+import React, { ChangeEvent, FC, useState } from "react";
+import { InputAdornment, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import style from "../../styles/login.module.css";
 import MailIcon from "@mui/icons-material/Mail";
-import HttpsIcon from "@mui/icons-material/Https"
-import GoogleIcon from '@mui/icons-material/Google';
+import HttpsIcon from "@mui/icons-material/Https";
+import GoogleIcon from "@mui/icons-material/Google";
 import PersonIcon from "@mui/icons-material/Person";
-import GitHubIcon from '@mui/icons-material/GitHub';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import LoadingButton from "@mui/lab/LoadingButton";
+import axios from "axios";
 
 const Register: FC = () => {
   const [user, setUser] = useState({
-    name: '',
-    username: '',
-    password: '',
-    email: '',
+    name: "",
+    username: "",
+    password: "",
+    email: "",
   });
 
-  const checkEmail = (email: string):boolean => {
-    if (email === '')
-      return false;
+  const [loading, setLoading] = useState(false);
+
+  const checkEmail = (email: string): boolean => {
+    if (email === "") return false;
     let regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-z]+)$/;
-    return email.match(regex) ? false : true
-  }
+    return email.match(regex) ? false : true;
+  };
 
   const emailHelperText = (email: string) => {
-    if(checkEmail(email))
-      return "Email not valid"
-    return ""
-  }
+    if (checkEmail(email)) return "Email not valid";
+    return "";
+  };
 
   const checkPassword = (password: string) => {
-    if (password === '')
-      return false
+    if (password === "") return false;
     // Minimum eight characters and one number:
-    let regex = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$";
-    return password.match(regex) ? false : true
-  }
+    let numRegex = /\d/g;
+    if (password.length < 8 || !numRegex.test(password)) {
+      return true;
+    }
+    return false;
+  };
 
   const passwordHelperText = (password: string) => {
     const numRegex = /\d/g;
-    
-    if(checkPassword(password)) {
-      if(password.length < 8 || !numRegex.test(password)) {
+
+    if (checkPassword(password)) {
+      if (password.length < 8 || !numRegex.test(password)) {
         return "Password must be more than 8 characters and contain a number";
-       }
+      }
     }
-    return ""
-  }
+    return "";
+  };
+
+  const checkFields = (user: any) => {
+    if (!user?.name || !user.email || !user.password || !user.email)
+      return false;
+    return true;
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {value, name} = e.target;
+    const { value, name } = e.target;
     setUser({
       ...user,
-      [name]: value
+      [name]: value,
     });
-  }
+  };
+
+  const handleSubmit = async () => {
+    if (checkFields(user)) {
+      const result = await axios
+        .post("api/user/create-user", user)
+        .then((data) => console.log(data));
+    }
+  };
 
   return (
     <section className={style.body}>
@@ -71,6 +89,8 @@ const Register: FC = () => {
               label={"Full Name"}
               id={"name"}
               name={"name"}
+              value={user.name}
+              onChange={handleChange}
               inputProps={{
                 style: {
                   padding: 10,
@@ -90,6 +110,8 @@ const Register: FC = () => {
               label={"Username"}
               id={"username"}
               name={"username"}
+              value={user.username}
+              onChange={handleChange}
               inputProps={{
                 style: {
                   padding: 10,
@@ -135,7 +157,6 @@ const Register: FC = () => {
               value={user.password}
               helperText={passwordHelperText(user.password)}
               onChange={handleChange}
-              
               inputProps={{
                 style: {
                   padding: 10,
@@ -155,6 +176,7 @@ const Register: FC = () => {
               color={"primary"}
               variant={"contained"}
               sx={{ marginBottom: "1rem", width: "100%" }}
+              onClick={handleSubmit}
             >
               Register
             </Button>
@@ -178,12 +200,31 @@ const Register: FC = () => {
         <footer className={style.footer}>
           <p>By Eddybruv</p>
           <div className={style.bottomIcons}>
-              <a href="https://github.com/eddybruv/Notelify" target="_blank" rel="noreferrer"><GitHubIcon /></a>
-              <a href="https://twitter.com/eddybruv_" target={"_blank"} rel="noreferrer"><TwitterIcon /></a>
-              <a href="https://www.linkedin.com/in/edwin-ajong/" target="_blank" rel="noreferrer"><LinkedInIcon/></a>
-          </div></footer>
+            <a
+              href="https://github.com/eddybruv/Notelify"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GitHubIcon />
+            </a>
+            <a
+              href="https://twitter.com/eddybruv_"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              <TwitterIcon />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/edwin-ajong/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <LinkedInIcon />
+            </a>
+          </div>
+        </footer>
       </section>
     </section>
   );
-}
-export default Register
+};
+export default Register;
