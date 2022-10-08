@@ -22,7 +22,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     const checkEmail: IUser[] = await UserModel.find({email});
 
     if (checkEmail.length > 0) {
-      res.json({message: "user with email already exists"})
+      res.json({message: "user with email already exists"}).status(400);
     } else {
       const checkUsername: IUser[] = await UserModel.find({username});
       if (checkUsername.length > 0) {
@@ -44,7 +44,7 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
     }
 
   } catch (error) {
-    throw (error)
+    console.log("Failed with error:", error)
   }
 }
 
@@ -52,9 +52,9 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
 
 const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const {username, password} = req.body as Pick<IUser, "username" | "password">;
+    const {email, password} = req.body as Pick<IUser, "email" | "password">;
 
-    const checkUsername:IUser[] = await UserModel.find({username})
+    const checkUsername:IUser[] = await UserModel.find({email})
 
     if(checkUsername.length > 0) {
       const user = checkUsername[0]
@@ -68,7 +68,7 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
           }
         })
     } else {
-      res.json({message: "user does not exists"})
+      res.status(400).json({message: "user does not exists"})
     }
   } catch(e) {
     throw(e);
