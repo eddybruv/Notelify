@@ -15,7 +15,7 @@ const Toast = ({ message, severity }: Props) => {
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       open={open}
       autoHideDuration={6000}
       onClose={handleClose}
