@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import { InputAdornment, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "../../styles/login.module.css";
 import MailIcon from "@mui/icons-material/Mail";
 import HttpsIcon from "@mui/icons-material/Https";
@@ -11,9 +11,11 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import LoadingButton from "@mui/lab/LoadingButton";
+import Toast from "../../components/Misc/Toast";
 import axios from "axios";
 
 const Register: FC = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     username: "",
@@ -22,6 +24,8 @@ const Register: FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [takenEmailToast, setTakenEmailToast] = useState(false);
+  const [inputFieldsToast, setInputFieldsToast] = useState(false);
 
   const checkEmail = (email: string): boolean => {
     if (email === "") return false;
@@ -67,14 +71,25 @@ const Register: FC = () => {
       ...user,
       [name]: value,
     });
+    setInputFieldsToast(false);
+    setTakenEmailToast(false);
   };
 
   const handleSubmit = async () => {
     if (checkFields(user)) {
       const result = await axios
         .post("api/user/create-user", user)
-        .then((data) => console.log(data));
+        .then((data) => {
+          localStorage.setItem("loggedUser", JSON.stringify(data.data));
+          navigate("/home");
+        })
+        .catch((data) => {
+          if (data.response.data.message === "user with email already exists")
+            setTakenEmailToast(true);
+        });
+      return;
     }
+    setInputFieldsToast(true);
   };
 
   return (
@@ -224,6 +239,12 @@ const Register: FC = () => {
           </div>
         </footer>
       </section>
+      {inputFieldsToast && (
+        <Toast severity="error" message="Please fill all input fields" />
+      )}
+      {takenEmailToast && (
+        <Toast severity="error" message="This email is already in use" />
+      )}
     </section>
   );
 };
