@@ -1,5 +1,5 @@
 export type IUser = {
-  user?: {
+  data?: {
     name: string;
     username: string;
     password: string;
