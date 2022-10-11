@@ -83,6 +83,47 @@ const getUsers = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const createUserGoogle = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { name, username, imageUrl, email, googleId, password } =
+      req.body as Pick<
+        IUser,
+        "name" | "username" | "imageUrl" | "email" | "googleId" | "password"
+      >;
+
+    const salt = await bcrypt.genSalt(10);
+
+    const checkEmail: IUser[] = await UserModel.find({ email });
+
+    if (checkEmail.length > 0) {
+      res.status(400).json({ message: "user with email already exists" });
+    } else {
+      const checkUsername: IUser[] = await UserModel.find({ username });
+      if (checkUsername.length > 0) {
+        res.status(400).json({ message: "username taken" });
+      } else {
+        const user: IUser = await new UserModel({
+          name,
+          username,
+          imageUrl,
+          googleId: await bcrypt.hash(googleId, salt),
+          password: await bcrypt.hash(password, salt),
+          email,
+          workspaceIDs: [],
+        });
+
+        const newUser: IUser = await user.save();
+        const token = jwt.sign(
+          { ...newUser },
+          process.env.ACCESS_TOKEN_SECRET,
+          { expiresIn: "7 days" }
+        );
+        res.json({ data: newUser, token });
+      }
+    }
+  } catch (error) {}
+};
+
 const addUserToWorkspace = async (
   req: Request,
   res: Response
